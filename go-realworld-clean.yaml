@@ -1,0 +1,27 @@
+namespace: go-realworld-clean
+go-realworld-clean:
+  defines: runnable
+  metadata:
+    name: go-realworld-clean
+    description: >-
+      Go application showcasing real world examples like CRUD operations,
+      authentication, routing, and pagination adhering to the RealWorld
+      specification.
+    icon: https://github.com/gothinkster/realworld-starter-kit/raw/master/logo.png
+  containers:
+    go-realworld-clean:
+      build: .
+  services:
+    application-port:
+      container: go-realworld-clean
+      port: 8080
+      host-port: 8080
+      publish: false
+      protocol: TCP
+      description: Port for running this Go application
+  variables:
+    tz:
+      env: TZ
+      type: string
+      description: Defines the timezone the application operates in
+      value: Europe/Paris
