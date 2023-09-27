@@ -1,0 +1,26 @@
+namespace: go-realworld-clean
+go-realworld-clean:
+  defines: runnable
+  metadata:
+    name: go-realworld-clean
+    description: >-
+      A clean architecture implementation of the RealWorld API spec written in
+      Go.
+    icon: https://emojiapi.dev/api/v1/robot.svg
+  containers:
+    go-realworld-clean:
+      build: .
+  services:
+    main-port:
+      container: go-realworld-clean
+      port: 8080
+      host-port: 8080
+      publish: false
+      protocol: TCP
+      description: Main application port
+  variables:
+    tz:
+      env: TZ
+      type: string
+      description: Timezone
+      value: Europe/Paris
