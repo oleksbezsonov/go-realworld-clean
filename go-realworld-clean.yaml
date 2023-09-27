@@ -1,0 +1,39 @@
+namespace: go-realworld-clean
+go-realworld-clean:
+  defines: runnable
+  metadata:
+    name: go-realworld-clean
+    description: A web application written in GoLang
+    icon: https://emojiapi.dev/api/v1/globe_with_meridians.svg
+  containers:
+    go-realworld-clean:
+      build: .
+  services:
+    http:
+      container: go-realworld-clean
+      port: <- $server.port
+      host-port: <- $server.port
+      publish: false
+      protocol: TCP
+      description: Main port the application listens on
+  variables:
+    server.port:
+      env: server.port
+      type: int
+      description: Port on which the application runs
+      value: '8080'
+    log.level:
+      env: log.level
+      type: string
+      description: The level of logging
+      value: '!!!SETME!!!'
+    log.format:
+      env: log.format
+      type: string
+      description: The format of the logs
+      value: '!!!SETME!!!'
+    jwt.salt:
+      env: jwt.Salt
+      type: string
+      description: Secret for JWT authentication
+      value: '!!!SETME!!!'
