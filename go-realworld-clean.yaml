@@ -1,0 +1,71 @@
+namespace: go-realworld-clean
+go-realworld-clean:
+  defines: runnable
+  metadata:
+    name: go-realworld-clean
+    description: >-
+      A clean, idiomatic RESTful API implementation of the RealWorld app backend
+      that uses Go.
+    icon: https://emojiapi.dev/api/v1/robot.svg
+  containers:
+    go-realworld-clean:
+      build: .
+  services:
+    go-realworld-clean-port:
+      container: go-realworld-clean
+      port: <- $server.port
+      host-port: <- $server.port
+      publish: false
+      protocol: TCP
+      description: The port the service listens on.
+  variables:
+    log.level:
+      env: log.level
+      type: string
+      description: Log level of the application.
+      value: info
+    log.format:
+      env: log.format
+      type: string
+      description: Log format of the application.
+      value: text
+    log.line:
+      env: log.line
+      type: boolean
+      description: Enable filename and line in logs.
+      value: 'false'
+    server.host:
+      env: server.host
+      type: string
+      description: Host on which the server should listen.
+      value: 127.0.0.1
+    server.port:
+      env: server.port
+      type: int
+      description: Port on which the server should listen.
+      value: '8080'
+    server.debug:
+      env: server.debug
+      type: boolean
+      description: Debug mode for the server.
+      value: 'false'
+    server.allowedorigins:
+      env: server.allowedOrigins
+      type: string
+      description: Allowed origins for the server.
+      value: '*'
+    server.token:
+      env: server.token
+      type: string
+      description: Authorization token to use if any.
+      value: '!!!SETME!!!'
+    jwt.salt:
+      env: jwt.salt
+      type: string
+      description: Salt to use for JWT signatures.
+      value: '!!!SETME!!!'
+    populate:
+      env: populate
+      type: boolean
+      description: Flag used to populate databases in order to run integration tests.
+      value: 'false'
